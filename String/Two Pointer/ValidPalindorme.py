@@ -2,25 +2,36 @@ import re
 def isPalindrome(s: str) -> bool:
 
     s = s.lower()
-    pattern = r'[^a-z0-9]'
-
-    # Replace all punctuation with empty string
-    clean_s = re.sub(pattern, '', s)
 
     left = 0 
+    right = len(s) - 1
 
-    right = len(clean_s) - 1 
+    while left <= right:
 
-    while left < right:
+        char_left = s[left]
 
-        if clean_s[left] == clean_s[right]:
+        char_right = s[right]
 
-            left += 1
-            right -=1
+        if char_left.isalnum() and char_right.isalnum():
 
+            if char_left != char_right:
+
+                return False
+
+            else:
+
+                left += 1
+
+                right -= 1
         else:
 
-            return False 
+            if not char_left.isalnum():
+
+                left += 1
+
+            if not char_right.isalnum():
+
+                right -= 1
 
     return True
 

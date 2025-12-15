@@ -14,17 +14,46 @@
 # The strings "ate", "eat", and "tea" are anagrams as they can be rearranged to form each other.
 
 
-# def groupAnagrams(strs):
+def groupAnagrams(strs):
 
-#     for i in range(len(strs)):
+    sorted_list = []
 
-#         strs[i] = sorted(strs[i])
+    for i in range(len(strs)):
 
-#     return strs
+        sorted_list.append(''.join(sorted(strs[i])))
 
-# strs = ["eat","tea","tan","ate","nat","bat"]
+    # [aet,aet,aet,ant,ant,abt]
 
-# print(groupAnagrams(strs))
+    hash_map = {}
+
+    for index in range(len(sorted_list)):
+
+        strVal = sorted_list[index]
+
+        if strVal in hash_map:
+            
+            hash_map[strVal].append(index)
+
+        else:
+
+            hash_map[strVal] = [index]
+
+    res = []
+
+    for value in hash_map.values():
+
+        inner_list = []
+
+        for item in value:
+
+            inner_list.append(strs[item])
+
+        res.append(inner_list)
 
 
-print(sorted("Shubham"))
+    return res
+
+
+strs = ["eat","tea","tan","ate","nat","bat"]
+
+print(groupAnagrams(strs))
